@@ -1,5 +1,5 @@
 /*
-    It is just for testing only
+    It is just for testing only, for switchExt usage
     
 */
 
