@@ -1,0 +1,8 @@
+{
+    "board": "arduino:avr:nano",
+    "configuration": "cpu=atmega328old",
+    "output": "Libraries\\switchExt\\build",
+    "sketch": "Libraries\\switchExt\\pushButton.ino",
+    "port": "COM7",
+    "programmer": "AVRISP mkII"
+}
