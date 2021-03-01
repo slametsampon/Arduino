@@ -1,0 +1,8 @@
+{
+    "board": "arduino:avr:nano",
+    "configuration": "cpu=atmega328old",
+    "output": "build",
+    "sketch": "LcdKeypadOOP.ino",
+    "port": "COM7",
+    "programmer": "AVRISP mkII"
+}

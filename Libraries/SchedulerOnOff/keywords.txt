@@ -1,0 +1,24 @@
+SchedulerOnOff	KEYWORD1
+isFlRun	KEYWORD2
+execute	KEYWORD2
+setRunCycle	KEYWORD2
+getRunCycle	KEYWORD2
+setPeriodeHour	KEYWORD2
+setPeriodeMinute	KEYWORD2
+setPeriodeSecond	KEYWORD2
+getPeriodTime	KEYWORD2
+setInitialStartHour	KEYWORD2
+setInitialStartMinute	KEYWORD2
+setInitialStartSecond	KEYWORD2
+setInitialStartTime	KEYWORD2
+setDurationOnHour	KEYWORD2
+setDurationOnMinute	KEYWORD2
+setDurationOnSecond	KEYWORD2
+setDurationOn	KEYWORD2
+setActive	KEYWORD2
+isActive	KEYWORD2
+###### Constants ######
+DEFAULT_RUN_CYCLE	LITERAL1
+MAX_MILLI	LITERAL1
+ONESHOOT_TYPE	LITERAL1
+CYCLYC_TYPE	LITERAL1

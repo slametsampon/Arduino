@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="styles.css">
+    </head>
+    <body>
+        <div class="header">
+            <label class="labelHeader" >Auto Mode</label>
+        </div><br><br><br><br>
+        <div style="position: relative;">
+            Bright : <p id="step"></p>
+            Dark : <p id="action"></p>
+            <div class="slidecontainer" style="margin: auto;">
+                <input type="range" min="0" max="100" value="50" class="slider" id="darknessRange">
+                <p>Setting Darkness: <span id="darknessSetting"></span></p>
+            </div>
+            Brightness : <p id="brightness"></p><br>
+            <div class="slidecontainer" style="margin: auto;">
+                <input type="range" min="0" max="100" value="50" class="slider" id="distanceRange">
+                <p>Setting Distance: <span id="distanceSetting"></span></p>
+            </div>
+            Distance : <p id="distance"></p>
+        </div>
+        <div class="footer">
+            <button  id="btnHome" class="btnText" onclick="document.location = 'index.html'">Home</button>
+        </div>
+        <script src="autoScript.js"></script>
+    </body>
+</html>
