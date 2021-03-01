@@ -1,3 +1,7 @@
+/*
+    It is just for testing only
+*/
+
 #include "ledExt.h"
 LedExt blinkTest(LED_BUILTIN);
 

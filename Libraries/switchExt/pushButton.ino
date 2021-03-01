@@ -1,3 +1,8 @@
+/*
+    It is just for testing only
+    
+*/
+
 #include "switchExt.h"
 
 switchExt SwitchTest(2);//use pin 2 for P/B

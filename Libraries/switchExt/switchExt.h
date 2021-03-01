@@ -11,19 +11,19 @@
 
     //master/base class
     class Device{
-    public:
-        virtual void init();
-        virtual boolean isStatus(unsigned long);
-    private:
+        public:
+            virtual void init();
+            virtual boolean isStatus(unsigned long);
+        private:
     };
 
     class switchExt : public Device{
-    public: 
-        switchExt(char pin);   
-        virtual void init();
-        virtual boolean isStatus(unsigned long);
-    private:
-        char  _pin;
-        unsigned long  _prevMilli;
+        public: 
+            switchExt(char pin);   
+            void init();
+            boolean isStatus(unsigned long);
+        private:
+            char  _pin;
+            unsigned long  _prevMilli;
     };
 #endif

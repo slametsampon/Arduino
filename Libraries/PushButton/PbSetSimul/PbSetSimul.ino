@@ -49,7 +49,7 @@ class PbSet{
       //get the highest number of active input
       int i=devInNbr;
       while( i > 0){
-          if (!digIn[i-1]->getVal())break;//braek from loop if active
+          if (!digIn[i-1]->getVal())break;//break from loop if active
           i--;
       }
       if (i == 0) i = _prevCmd;
