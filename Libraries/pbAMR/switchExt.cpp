@@ -7,15 +7,15 @@
 /* Dependencies */
 #include "switchExt.h"
 
-switchExt::switchExt(char pin):_pin(pin){}
-void switchExt::init(){
+SwitchExt::SwitchExt(char pin):_pin(pin){}
+void SwitchExt::init(){
   // Keep in mind the pull-up means the pushbutton's logic is inverted. It goes
   // HIGH when it's open, and LOW when it's pressed. 
   // HARDWARE WIRING SHOULD BE CONCERNED !!!!! 
   pinMode(_pin, INPUT_PULLUP);
 }
 
-boolean switchExt::isStatus(unsigned long holdTime){
+boolean SwitchExt::isStatus(unsigned long holdTime){
   boolean validSts = false;
   //HIGH when it's open, and LOW when it's pressed. it's INPUT_PULLUP
   if (!digitalRead(_pin)){

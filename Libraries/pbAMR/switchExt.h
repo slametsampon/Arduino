@@ -17,9 +17,9 @@
         private:
     };
 
-    class switchExt : public Device{
+    class SwitchExt : public Device{
         public: 
-            switchExt(char pin);   
+            SwitchExt(char pin);   
             void init();
             boolean isStatus(unsigned long);
         private:
