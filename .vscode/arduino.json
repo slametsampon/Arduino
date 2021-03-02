@@ -1,8 +1,8 @@
 {
     "board": "arduino:avr:nano",
     "configuration": "cpu=atmega328old",
-    "output": "Libraries\\fireSensor\\build",
-    "sketch": "Libraries\\fireSensor\\fireSensor.ino",
+    "output": "libraries\\ledExt\\build",
+    "sketch": "libraries\\ledExt\\blinkExt.ino",
     "port": "COM7",
     "programmer": "AVRISP mkII"
 }
