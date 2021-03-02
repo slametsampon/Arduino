@@ -1,8 +1,8 @@
 {
     "board": "arduino:avr:nano",
     "configuration": "cpu=atmega328old",
-    "output": "Libraries\\pbAMR\\build",
-    "sketch": "Libraries\\pbAMR\\pushBtAutoManualReset.ino",
+    "output": "Libraries\\pbLed\\build",
+    "sketch": "Libraries\\pbLed\\pbLed.ino",
     "port": "COM7",
     "programmer": "AVRISP mkII"
 }
