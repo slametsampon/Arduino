@@ -1,0 +1,12 @@
+SequenceTimer	KEYWORD1
+setSetingMiliSecond	KEYWORD2
+setSetingSecond	KEYWORD2
+getSetingMiliSecond	KEYWORD2
+getSetingSecond	KEYWORD2
+isMiliSecondEvent	KEYWORD2
+isSecondEvent	KEYWORD2
+execute	KEYWORD2
+setPulsePeriod	KEYWORD2
+getPulsePeriod	KEYWORD2
+isASecondEvent	KEYWORD2
+isAMinuteEvent	KEYWORD2
