@@ -10,7 +10,7 @@
 #include "Arduino.h"
 #include "signalConst.h"
 #include "param.h"
-#include "..\global\localPanelConst.h"
+#include "..\global\robotConstOOP.h"
 
     class AnalogInput{
         public: 
