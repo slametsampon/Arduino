@@ -11,13 +11,10 @@
 
     class drvCmd{
     public:    
-        virtual void init();//Initialization
+        virtual void init(String);//Initialization
         virtual void info();
-        virtual char getCmd();
-        virtual void move(char);
-        virtual void move(char, unsigned long);
-        virtual void moveCallBack(char, unsigned long, CallBackFunction callback);
-        virtual boolean isMoveable();
+        virtual void move(int);
+        virtual void move(int, int);
     };
 
 #endif

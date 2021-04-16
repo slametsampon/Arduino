@@ -20,12 +20,12 @@ All constants for local panel
     const int PIN_LED_RIGHT     = 53; 
 
     //drive
-    const int PIN_L298N_LEFT_ENA    = 44; 
-    const int PIN_L298N_LEFT_IN1    = 45; 
-    const int PIN_L298N_LEFT_IN2    = 47; 
-    const int PIN_L298N_RIGHT_ENB   = 46; 
-    const int PIN_L298N_RIGHT_IN3   = 49; 
-    const int PIN_L298N_RIGHT_IN4   = 51; 
+    const int PIN_MOTOR_LEFT_ENA    = 44; 
+    const int PIN_MOTOR_LEFT_IN1    = 45; 
+    const int PIN_MOTOR_LEFT_IN2    = 47; 
+    const int PIN_MOTOR_RIGHT_ENB   = 46; 
+    const int PIN_MOTOR_RIGHT_IN3   = 49; 
+    const int PIN_MOTOR_RIGHT_IN4   = 51; 
 
     const int ADC_MAX = 1023;//10 bits
     const int ALFA_EMA = 80;//AlfaEma filter

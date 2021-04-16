@@ -6,41 +6,52 @@
 #define mobileRobot_h
 
     #include <Arduino.h>
-    #include <L298N.h>
     #include "src\compDevices\drvCmd.h"
+    #include "src\compDevices\motor.h"
     #include "src\global\robotConstOOP.h"
 
     typedef void (*CallBackFunction) ();
 
-    const char MAX_DRIVE = 4;//Maximum Input mobileRobot devices
-    const char STOP_BT = '%';//Stop Bluetooth mobileRobot
+    const int MAX_GEAR = 5;
 
     //For cmd constants
-    const char FORWARD_CMD = 'F';
-    const char BACK_CMD = 'B';
-    const char TURN_RIGHT_CMD = 'R';
-    const char TURN_LEFT_CMD = 'L';
-    const char STOP_CMD = 'S';
-    const char UP_CMD = 'U';
-    const char DOWN_CMD = 'D';
+    const char CMD_FORWARD = 'F';
+    const char CMD_BACKWARD = 'B';
+    const char CMD_TURN_RIGHT = 'R';
+    const char CMD_TURN_LEFT = 'L';
+    const char CMD_STOP = 'S';
+    const char CMD_UP = 'U';
+    const char CMD_DOWN = 'D';
+    const char CMD_AROUND_LEFT = 'I';
+    const char CMD_AROUND_RIGHT = 'O';
 
     const char NO_CMD = 'N';
 
     class MobileRobot : public drvCmd{
-        public:    
-            void init();//Initialization
+        public: 
+            MobileRobot(String);
+            void init(String);//Initialization
             void info();
-            char getCmd();
-            void move(char);
-            void move(char, unsigned long);
-            void moveCallBack(char, unsigned long, CallBackFunction callback);
-            boolean isMoveable();
+            void move(int);
+            void move(int, int);
 
-            void attachDrive(drvCmd*);//penggunaan pointer ini sangat mutlak (JIKA TIDAK ERROR !!!!)
+            void move(int, int, unsigned long);//just one shoot
+            void move(int, int, unsigned long, CallBackFunction callback);
+            void reset();
+
+            void attachMotor(Motor*, Motor*);
+
 
         private:
-            L298N *_drive[MAX_DRIVE];
+            String _device, _id;
+            int _gear;
+            unsigned long _prevMs;
+            boolean _canMove, _isMoving;
 
+            Motor *_motorLeft, *_motorRight;
+
+            static void fakeCallback();
+            int _setSpeed(int);
     };
 
 #endif
