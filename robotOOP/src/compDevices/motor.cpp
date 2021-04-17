@@ -23,6 +23,10 @@ void Motor::init(String id){
     this->init();
 }
 
+char Motor::getCmd(){
+  return _cmd;
+}
+
 void Motor::info(){
   Serial.println("Motor::info()");
 

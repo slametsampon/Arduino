@@ -30,7 +30,6 @@ void LocPan::info(){
   Serial.print("_id : ");
   Serial.println(_id);
 
-
   for (int i=0; i < this->cmdInNbr; i++){
       _cmdInput[i]->info();
   }
@@ -65,14 +64,29 @@ void LocPan::menu(){
 
   switch (_modeMenu){
     case MODE_MAIN:
-      //this->_menuMain(key);
+      this->_menuMain(key);
       break;
+
     case MODE_LOCAL:
       //this->_menuParameter(key);
       break;
+
     case MODE_REMOTE:
       //this->_menuChangeParameter(key);
       break;
+
+    case MODE_GYM:
+      //this->_menuChangeParameter(key);
+      break;
+      
+    case MODE_LINE_TRACER:
+      //this->_menuChangeParameter(key);
+      break;
+      
+    case MODE_AVOIDER:
+      //this->_menuChangeParameter(key);
+      break;
+      
     case 'N':
     default:
         break;
@@ -100,30 +114,34 @@ void LocPan::_menuMain(char key){
         case 'S':
           //Tempatkan menu di sini
           break;
+
         case 'U':
           //naikkan index
           idx = this->_increaseIndex();
           this->_sendMenu(idx);//kirim menu ke serial port
           this->_viewMenu(idx);//tampilkan menu ke lcd
           break;
+
         case 'D':
           //Turunkan index
           idx = this->_decreaseIndex();
           this->_sendMenu(idx);//kirim menu ke serial port
           this->_viewMenu(idx);//tampilkan menu ke lcd
           break;
+
         case 'L':
           //Tempatkan menu di sini
           break;
+
         case 'R':
           //ke menu parameter
           break;
+
         case 'N'://No Key
         default:
           break;
     }
 }
-
 
 char LocPan::_getCommand(){
   char rawCmd = NO_KEY;
@@ -143,6 +161,8 @@ void LocPan::_viewMenu(int index){
       tempMenu = _accessMenu->read(index);
       _view->clearView();//hapus semua tampilan dulu
       _prevMenuIndex = index;
+      _view->viewMessage(0,0,"SMART MOBILE ROBOT");
+      _view->viewMessage(1,0,tempMenu.Messages);
     }
   }
 
@@ -152,6 +172,8 @@ void LocPan::_sendMenu(int index){
       tempMenu = _accessMenu->read(index);
       Serial.print("index : ");
       Serial.println(index);
+      Serial.print("tempMenu.Messages : ");
+      Serial.println(tempMenu.Messages);
 
       //_prevMenuIndex = index;
     }
@@ -165,6 +187,7 @@ int LocPan::_increaseIndex(){
         else _menuIndex = 0;
         return _menuIndex;
         break;
+
       default:
           break;
     }
@@ -178,11 +201,11 @@ int LocPan::_decreaseIndex(){
         else _menuIndex = AccessDataMenu::getmenuNbr()-1;
         return _menuIndex;
         break;
+        
       default:
           break;
     }
 }
-
 
 void LocPan::_setupMenu(){
   dataMenu  dtMenu;

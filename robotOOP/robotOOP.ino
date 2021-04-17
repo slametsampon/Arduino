@@ -17,6 +17,9 @@ LocPan              locPan("LocPan-Local Panel");//local panel
 
 DigitalOutput ledLife(LED_BUILTIN);
 
+DigitalOutput ledLeft(PIN_LED_LEFT);
+DigitalOutput ledRight(PIN_LED_RIGHT);
+LedLR ledLR(&ledLeft, &ledRight);
 Motor motorLeft(PIN_MOTOR_LEFT_ENA, PIN_MOTOR_LEFT_IN1, PIN_MOTOR_LEFT_IN2);
 Motor motorRight(PIN_MOTOR_RIGHT_ENB, PIN_MOTOR_RIGHT_IN3, PIN_MOTOR_RIGHT_IN4);
 
@@ -44,6 +47,7 @@ void setup() {
 
   //attachment all peripherals for mobileRobot
   mobileRobot.attachMotor(&motorLeft, &motorRight);
+  mobileRobot.attachLedLR(&ledLR);
   //init for peripherals
   mobileRobot.init();
   mobileRobot.info();
@@ -53,7 +57,8 @@ void setup() {
 void loop() {
   ledLife.blink(500);
 
-  mobileRobot.move(MOBILE_FORWARD, gear, 5000, mobileCallback);
+  mobileRobot.move(MOBILE_BACKWARD, gear, 5000, mobileCallback);
+  locPan.menu();
 }
 
 void mobileCallback(){

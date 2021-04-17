@@ -22,6 +22,7 @@
             void init(String);//Initialization
             void info();
             void status();
+            char getCmd();
             void move(char);//move full speed
             void move(char, int);
 
