@@ -8,6 +8,7 @@
     #include <Arduino.h>
     #include "src\compDevices\drvCmd.h"
     #include "src\compDevices\motor.h"
+    #include "src\compDevices\ledLR.h"
     #include "src\global\robotConstOOP.h"
 
     typedef void (*CallBackFunction) ();
@@ -42,7 +43,7 @@
             void reset();
 
             void attachMotor(Motor*, Motor*);
-
+            void attachLedLR(LedLR*);//led Left and Right
 
         private:
             String _device, _id, _cmdStr;
@@ -52,6 +53,7 @@
             char _cmd;
 
             Motor *_motorLeft, *_motorRight;
+            LedLR *_ledLR;
 
             static void fakeCallback();
             int _setSpeed(int);

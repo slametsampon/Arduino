@@ -10,9 +10,14 @@ void MobileRobot::attachMotor(Motor *left, Motor *right){
     _motorRight = right;
 }
 
+void MobileRobot::attachLedLR(LedLR *ledLR){
+    _ledLR = ledLR;
+}
+
 void MobileRobot::init(){
     _motorLeft->init("_motorLeft");
     _motorRight->init("_motorRight");
+    _ledLR->init();
 }
 
 void MobileRobot::init(String id){
@@ -74,6 +79,7 @@ void MobileRobot::move(char cmd, int gear){
         default:
             break;
     }
+    _ledLR->status(_motorLeft->getCmd(), _motorRight->getCmd());
 }
 
 void MobileRobot::move(char cmd, int gear, unsigned long delay){
@@ -129,6 +135,7 @@ void MobileRobot::info(){
   Serial.println("Attachment : ");
   _motorLeft->info();
   _motorRight->info();
+  _ledLR->info();
 
 }
 
