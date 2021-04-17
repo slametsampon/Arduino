@@ -13,9 +13,11 @@ KeyPad::KeyPad(AnalogInput *aI):_analogInput(aI){
 
 void KeyPad::info(){
     Serial.println("KeyPad::info()");
-    String str;
 
     _analogInput->info();
+
+    Serial.print("VALUE_RIGHT : ");
+    Serial.println(VALUE_RIGHT);
 
     Serial.print("VALUE_UP : ");
     Serial.println(VALUE_UP);
@@ -29,7 +31,7 @@ void KeyPad::info(){
     Serial.print("VALUE_SELECT : ");
     Serial.println(VALUE_SELECT);
 
-    Serial.println("<----->");
+    Serial.println(" ");
 }
 
 void KeyPad::init(){

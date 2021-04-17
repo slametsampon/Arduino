@@ -52,7 +52,7 @@ All constants for local panel
         MODE_GYM, //index 3    
         MODE_LINE_TRACER, //index 4    
         MODE_AVOIDER, //index 5    
-        // leave this one
+        //! leave this one
         MAX_MENU 
     };
 

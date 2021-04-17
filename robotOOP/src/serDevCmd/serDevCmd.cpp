@@ -15,10 +15,10 @@ void serialCmd::init(){}
 void serialCmd::info(){
     Serial.println("serialCmd::info()");
 
-    Serial.print("_id");
+    Serial.print("_id : ");
     Serial.println(_id);
 
-    Serial.println("<----->");
+    Serial.println(" ");
 }
 
 char serialCmd::getCode(){

@@ -11,6 +11,7 @@
 
     class drvCmd{
     public:    
+        virtual void init();//Initialization
         virtual void init(String);//Initialization
         virtual void info();
         virtual void status();

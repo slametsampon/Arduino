@@ -12,11 +12,15 @@ Motor::Motor(int pinEa, int pin1, int pin2):
     this->init(_device);
 }
 
-void Motor::init(String id){
-    _id = id;
+void Motor::init(){
     pinMode(_pinEnable, OUTPUT);
     pinMode(_pinIN1, OUTPUT);
     pinMode(_pinIN2, OUTPUT);
+}
+
+void Motor::init(String id){
+    _id = id;
+    this->init();
 }
 
 void Motor::info(){

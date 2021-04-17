@@ -12,7 +12,6 @@
 #include "..\global\robotConstOOP.h"
 
 typedef struct dataMenu{
-  char code;
   char* Messages;
 }dataMenu;
 

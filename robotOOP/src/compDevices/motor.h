@@ -18,6 +18,7 @@
     class Motor : public drvCmd{
         public:
             Motor(int, int, int);    
+            void init();//Initialization
             void init(String);//Initialization
             void info();
             void status();

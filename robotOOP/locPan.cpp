@@ -21,12 +21,12 @@ void LocPan::init(){
   }
 
   this->_setupMenu();
-  this->_setupParameter();
+  //this->_setupParameter();
 
 }
 
 void LocPan::info(){
-  Serial.println("LocPan::info()=>Local Panel System");
+  Serial.println("LocPan::info()");
   Serial.print("_id : ");
   Serial.println(_id);
 
@@ -189,8 +189,19 @@ void LocPan::_setupMenu(){
 
   Serial.println("LocPan::_setupMenu()");
 
-  dtMenu.code='M';
   dtMenu.Messages="Menu Local";
+  _accessMenu->add(dtMenu);
+
+  dtMenu.Messages="Menu Remote";
+  _accessMenu->add(dtMenu);
+
+  dtMenu.Messages="Menu Gym";
+  _accessMenu->add(dtMenu);
+
+  dtMenu.Messages="Menu Line Tracer";
+  _accessMenu->add(dtMenu);
+
+  dtMenu.Messages="Menu Avoider";
   _accessMenu->add(dtMenu);
 
 }

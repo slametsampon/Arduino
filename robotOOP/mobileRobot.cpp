@@ -5,8 +5,19 @@ MobileRobot::MobileRobot(String id):_id(id), _device("MobileRobot"){
     _isMoveable = true;
 }
 
+void MobileRobot::attachMotor(Motor *left, Motor *right){
+    _motorLeft = left;
+    _motorRight = right;
+}
+
+void MobileRobot::init(){
+    _motorLeft->init("_motorLeft");
+    _motorRight->init("_motorRight");
+}
+
 void MobileRobot::init(String id){
     _id = id;
+    this->init();
 }
 
 void MobileRobot::move(char cmd){
@@ -119,11 +130,6 @@ void MobileRobot::info(){
   _motorLeft->info();
   _motorRight->info();
 
-}
-
-void MobileRobot::attachMotor(Motor *left, Motor *right){
-    _motorLeft = left;
-    _motorRight = right;
 }
 
 void MobileRobot::fakeCallback(){

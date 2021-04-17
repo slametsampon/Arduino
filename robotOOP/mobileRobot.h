@@ -30,6 +30,7 @@
     class MobileRobot : public drvCmd{
         public: 
             MobileRobot(String);
+            void init();//Initialization
             void init(String);//Initialization
             void info();
             void status();
