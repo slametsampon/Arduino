@@ -20,6 +20,8 @@ void Motor::init(String id){
 }
 
 void Motor::info(){
+  Serial.println("Motor::info()");
+
   Serial.print("_id : ");
   Serial.println(_id);
 
@@ -35,30 +37,51 @@ void Motor::info(){
   Serial.print("_pinIN2 : ");
   Serial.println(_pinIN2);
 
+  Serial.println(" ");
+
 }
 
-void Motor::move(int cmd){
+void Motor::status(){
+  Serial.println("Motor::status()");
+  Serial.print("_id : ");
+  Serial.println(_id);
+
+  Serial.print("_cmdStr : ");
+  Serial.println(_cmdStr);
+
+  Serial.print("_pwmVal : ");
+  Serial.println(_pwmVal);
+
+  Serial.println(" ");
+
+}
+
+void Motor::move(char cmd){
     this->move(cmd, MAX_PWM);
 }
 
-void Motor::move(int cmd, int speed){
+void Motor::move(char cmd, int speed){
 
     _pwmVal = speed;
+    _cmd = cmd;
     analogWrite(_pinEnable, _pwmVal);
 
-    switch (cmd)
+    switch (_cmd)
     {
         case MOTOR_STOP:
             analogWrite(_pinEnable, MAX_PWM);
             this->_stop();
+            _cmdStr = "MOTOR_STOP";
             break;
         
         case MOTOR_FORWARD:
             this->_forward();
+            _cmdStr = "MOTOR_FORWARD";
             break;
         
         case MOTOR_BACKWARD:
             this->_backward();
+            _cmdStr = "MOTOR_BACKWARD";
             break;
         
         default:

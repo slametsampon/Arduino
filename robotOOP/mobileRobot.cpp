@@ -1,54 +1,63 @@
 #include "mobileRobot.h"
-
 MobileRobot::MobileRobot(String id):_id(id), _device("MobileRobot"){
 
-    //this->init(_device);
+    _prevMs = 0;
+    _isMoveable = true;
 }
 
 void MobileRobot::init(String id){
     _id = id;
 }
 
-void MobileRobot::move(int cmd){
+void MobileRobot::move(char cmd){
     this->move(cmd,MAX_GEAR);
 }
 
-void MobileRobot::move(int cmd, int gear){
-    switch (cmd)
+void MobileRobot::move(char cmd, int gear){
+    _cmd = cmd;
+    _gear = gear;
+    switch (_cmd)
     {
-        case CMD_FORWARD:
+        case MOBILE_FORWARD:
             _motorLeft->move(MOTOR_FORWARD, this->_setSpeed(gear));
             _motorRight->move(MOTOR_FORWARD, this->_setSpeed(gear));
+            _cmdStr = "MOBILE_FORWARD";
             break;
         
-        case CMD_BACKWARD:
+        case MOBILE_BACKWARD:
             _motorLeft->move(MOTOR_BACKWARD, this->_setSpeed(gear));
             _motorRight->move(MOTOR_BACKWARD, this->_setSpeed(gear));
+            _cmdStr = "MOBILE_BACKWARD";
             break;
         
-        case CMD_TURN_LEFT:
+        case MOBILE_TURN_LEFT:
             _motorLeft->move(MOTOR_FORWARD, this->_setSpeed(gear));
             _motorRight->move(MOTOR_STOP, this->_setSpeed(gear));
+            _cmdStr = "MOBILE_TURN_LEFT";
             break;
         
-        case CMD_TURN_RIGHT:
+        case MOBILE_TURN_RIGHT:
             _motorLeft->move(MOTOR_STOP, this->_setSpeed(gear));
             _motorRight->move(MOTOR_FORWARD, this->_setSpeed(gear));
+            _cmdStr = "MOBILE_TURN_RIGHT";
             break;
         
-        case CMD_AROUND_LEFT:
+        case MOBILE_AROUND_LEFT:
             _motorLeft->move(MOTOR_BACKWARD, this->_setSpeed(gear));
             _motorRight->move(MOTOR_FORWARD, this->_setSpeed(gear));
+            _cmdStr = "MOBILE_AROUND_LEFT";
             break;
         
-        case CMD_AROUND_RIGHT:
+        case MOBILE_AROUND_RIGHT:
             _motorLeft->move(MOTOR_FORWARD, this->_setSpeed(gear));
             _motorRight->move(MOTOR_BACKWARD, this->_setSpeed(gear));
+            _cmdStr = "MOBILE_AROUND_RIGHT";
             break;
         
-        case CMD_STOP:
+        case MOBILE_STOP:
             _motorLeft->move(MOTOR_STOP, this->_setSpeed(gear));
             _motorRight->move(MOTOR_STOP, this->_setSpeed(gear));
+            _cmdStr = "MOBILE_STOP";
             break;
         
         default:
@@ -56,7 +65,50 @@ void MobileRobot::move(int cmd, int gear){
     }
 }
 
+void MobileRobot::move(char cmd, int gear, unsigned long delay){
+    this->move(cmd, gear, delay, fakeCallback);
+}
+
+void MobileRobot::move(char cmd, int gear, unsigned long delay, CallBackFunction callback){
+
+    if ((_prevMs == 0) && _isMoveable){
+
+        _prevMs = millis();
+        this->move(cmd,gear);
+
+    }
+
+    if (((millis() - _prevMs) > delay) && _isMoveable){
+        //this->status();
+        this->move(MOBILE_STOP);
+        _prevMs = 0;
+        _isMoveable = false;
+
+        callback();
+    }
+}
+
+void MobileRobot::status(){
+  Serial.println("MobileRobot::status()");
+
+  Serial.print("_id : ");
+  Serial.println(_id);
+
+  Serial.print("_cmdStr : ");
+  Serial.println(_cmdStr);
+
+  Serial.print("_gear : ");
+  Serial.println(_gear);
+
+  Serial.println("Attachment : ");
+  _motorLeft->status();
+  _motorRight->status();
+
+}
+
 void MobileRobot::info(){
+  Serial.println("MobileRobot::info()");
+
   Serial.print("_id : ");
   Serial.println(_id);
 
@@ -76,6 +128,10 @@ void MobileRobot::attachMotor(Motor *left, Motor *right){
 
 void MobileRobot::fakeCallback(){
 
+}
+
+void MobileRobot::reset(){
+    _isMoveable = true;
 }
 
 int MobileRobot::_setSpeed(int gear){

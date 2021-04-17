@@ -13,8 +13,9 @@
     public:    
         virtual void init(String);//Initialization
         virtual void info();
-        virtual void move(int);
-        virtual void move(int, int);
+        virtual void status();
+        virtual void move(char);
+        virtual void move(char, int);
     };
 
 #endif

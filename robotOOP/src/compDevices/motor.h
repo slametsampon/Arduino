@@ -10,9 +10,9 @@
 
     typedef void (*CallBackFunction) ();
 
-    const int MOTOR_STOP = 0;
-    const int MOTOR_FORWARD = 1;
-    const int MOTOR_BACKWARD = 2;
+    const char MOTOR_STOP = 'S';
+    const char MOTOR_FORWARD = 'F';
+    const char MOTOR_BACKWARD = 'B';
     const int MAX_PWM = 255;
 
     class Motor : public drvCmd{
@@ -20,11 +20,12 @@
             Motor(int, int, int);    
             void init(String);//Initialization
             void info();
-            void move(int);//move full speed
-            void move(int, int);
+            void status();
+            void move(char);//move full speed
+            void move(char, int);
 
         private:
-            String _device, _id;
+            String _device, _id, _cmdStr;
             int _cmd, _pinEnable, _pinIN1, _pinIN2, _pwmVal;
 
             void _stop();

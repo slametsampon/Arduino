@@ -15,15 +15,15 @@
     const int MAX_GEAR = 5;
 
     //For cmd constants
-    const char CMD_FORWARD = 'F';
-    const char CMD_BACKWARD = 'B';
-    const char CMD_TURN_RIGHT = 'R';
-    const char CMD_TURN_LEFT = 'L';
-    const char CMD_STOP = 'S';
-    const char CMD_UP = 'U';
-    const char CMD_DOWN = 'D';
-    const char CMD_AROUND_LEFT = 'I';
-    const char CMD_AROUND_RIGHT = 'O';
+    const char MOBILE_FORWARD = 'F';
+    const char MOBILE_BACKWARD = 'B';
+    const char MOBILE_TURN_RIGHT = 'R';
+    const char MOBILE_TURN_LEFT = 'L';
+    const char MOBILE_STOP = 'S';
+    const char MOBILE_UP = 'U';
+    const char MOBILE_DOWN = 'D';
+    const char MOBILE_AROUND_LEFT = 'I';
+    const char MOBILE_AROUND_RIGHT = 'O';
 
     const char NO_CMD = 'N';
 
@@ -32,21 +32,23 @@
             MobileRobot(String);
             void init(String);//Initialization
             void info();
-            void move(int);
-            void move(int, int);
+            void status();
+            void move(char);
+            void move(char, int);
 
-            void move(int, int, unsigned long);//just one shoot
-            void move(int, int, unsigned long, CallBackFunction callback);
+            void move(char, int, unsigned long);//just one shoot
+            void move(char, int, unsigned long, CallBackFunction callback);
             void reset();
 
             void attachMotor(Motor*, Motor*);
 
 
         private:
-            String _device, _id;
+            String _device, _id, _cmdStr;
             int _gear;
             unsigned long _prevMs;
-            boolean _canMove, _isMoving;
+            boolean _isMoveable, _isMoving;
+            char _cmd;
 
             Motor *_motorLeft, *_motorRight;
 

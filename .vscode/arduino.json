@@ -1,8 +1,8 @@
 {
-    "board": "arduino:avr:nano",
-    "configuration": "cpu=atmega328old",
-    "output": "libraries\\ledExt\\build",
-    "sketch": "libraries\\ledExt\\blinkExt.ino",
+    "board": "arduino:avr:mega",
+    "configuration": "cpu=atmega2560",
+    "output": "build",
+    "sketch": "robotOOP\\robotOOP.ino",
     "port": "COM7",
     "programmer": "AVRISP mkII"
 }
