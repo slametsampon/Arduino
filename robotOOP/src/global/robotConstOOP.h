@@ -42,4 +42,18 @@ All constants for local panel
     const int REMOTE_OPERATION_EXCEPTION = 3;//change on value or operation mode remotely
     const int REMOTE_PARAMETER_EXCEPTION = 4;//change on parameter remotely
 
+    //menu status
+    const int DEFAULT_INDEX = 999;
+
+    enum{     
+        MODE_MAIN, //index 0    
+        MODE_LOCAL, //index 1    
+        MODE_REMOTE, //index 2    
+        MODE_GYM, //index 3    
+        MODE_LINE_TRACER, //index 4    
+        MODE_AVOIDER, //index 5    
+        // leave this one
+        MAX_MENU 
+    };
+
 #endif
