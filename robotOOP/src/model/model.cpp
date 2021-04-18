@@ -33,6 +33,19 @@ void AccessCmdRecord::info(){
   Serial.println(" ");
 }
 
+void AccessCmdRecord::serialShowCmdRobot(cmdRobot *cmd){
+  Serial.print("cmd->cmd : ");
+  Serial.println(cmd->cmd);
+
+  Serial.print("cmd->gear : ");
+  Serial.println(cmd->gear);
+
+  Serial.print("cmd->milliS : ");
+  Serial.println(cmd->milliS);
+
+  Serial.println(" ");
+}
+
 void AccessCmdRecord::add(char cmd, int gear, unsigned long milliS) {
   _nbrRecord++;
   cmdRobot* temp;
@@ -53,4 +66,8 @@ void AccessCmdRecord::add(char cmd, int gear, unsigned long milliS) {
     temp->next = NULL;
     _lastRecord = temp;
   }
+}
+
+cmdRobot *AccessCmdRecord::getFirstRecord(){
+  return _firstRecord;
 }

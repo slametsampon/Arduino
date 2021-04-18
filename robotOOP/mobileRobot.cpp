@@ -6,11 +6,13 @@ MobileRobot::MobileRobot(String id):_id(id), _device("MobileRobot"){
 }
 
 void MobileRobot::attachMotor(Motor *left, Motor *right){
+    Serial.println("MobileRobot::attachMotor(Motor *left, Motor *right)");
     _motorLeft = left;
     _motorRight = right;
 }
 
 void MobileRobot::attachLedLR(LedLR *ledLR){
+    Serial.println("MobileRobot::attachLedLR(LedLR *ledLR)");
     _ledLR = ledLR;
 }
 
@@ -141,6 +143,10 @@ void MobileRobot::info(){
 
 void MobileRobot::fakeCallback(){
 
+}
+
+boolean MobileRobot::isMoveable(){
+    return _isMoveable;
 }
 
 void MobileRobot::reset(){

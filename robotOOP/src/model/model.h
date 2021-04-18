@@ -43,6 +43,7 @@
       void add(char, int, unsigned long);
       cmdRobot *getFirstRecord();
       void info();
+      void serialShowCmdRobot(cmdRobot*);
     private:
       String    _id;
       int _nbrRecord=0;

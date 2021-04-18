@@ -15,13 +15,21 @@ void Controller::info(){
   Serial.println(_id);
 
   Serial.println("Attachment : ");
+  _mobileRobot->info();
   _accessGymRecord->info();
 }
 
 void Controller::init(){
+    _mobileRobot->init("_mobileRobot");
     this->_initGym();
+    _prevCmd = _accessGymRecord->getFirstRecord();
 }
 
+void Controller::attachMobileRobot(MobileRobot *mobileRobot){
+    Serial.println("Controller::attachMobileRobot(MobileRobot *mobileRobot)");
+    _mobileRobot = mobileRobot;
+}
+  
 void Controller::attachGymRecord(AccessCmdRecord *accessGymRecord){
     Serial.println("Controller::attachGymRecord(AccessCmdRecord *accessGymRecord)");
     _accessGymRecord = accessGymRecord;
@@ -40,18 +48,25 @@ int Controller::getException(){
 
 void Controller::execute(int operationMode){
 
-  if(_operationMode == operationMode) return;//exit
+  if(_operationMode != operationMode){
   _exception = LOCAL_OPERATION_EXCEPTION;
   _operationMode = operationMode;
-
+  }
   switch (_operationMode){
     case MODE_GYM:
-      /* code */
+      _operationModeStr = "MODE_GYM";
+      this->_modeGym();
       break;
     
     default:
       break;
   }
+}
+
+void Controller::serialShowOperationMode(){
+  Serial.print("_operationModeStr : ");
+  Serial.println(_operationModeStr);
+  
 }
 
 void Controller::_initGym(){
@@ -68,3 +83,23 @@ void Controller::_initGym(){
   _accessGymRecord->add(MOBILE_AROUND_LEFT,MAX_GEAR,2000);
   _accessGymRecord->add(MOBILE_AROUND_RIGHT,MAX_GEAR,2000);
 }
+
+void Controller::_modeGym(){
+  if (_prevCmd != NULL){
+    if (!_mobileRobot->isMoveable()){
+      Serial.print("_gymStep : ");
+      Serial.println(_gymStep);
+      _accessGymRecord->serialShowCmdRobot(_prevCmd);
+      _gymStep++;
+      _prevCmd = _prevCmd->next;
+      _mobileRobot->reset();
+    }
+    _mobileRobot->move(_prevCmd->cmd, _prevCmd->gear, _prevCmd->milliS); 
+  }
+  else {
+    _prevCmd = _accessGymRecord->getFirstRecord();
+    _gymStep = 0;
+    Serial.println("<<<------Gym Completed------->>>");
+  }
+}
+

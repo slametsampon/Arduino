@@ -10,7 +10,7 @@
     #include "src\compDevices\motor.h"
     #include "src\compDevices\ledLR.h"
     #include "src\global\robotConstOOP.h"
-
+    
     typedef void (*CallBackFunction) ();
 
     class MobileRobot : public drvCmd{
@@ -25,6 +25,7 @@
 
             void move(char, int, unsigned long);//just one shoot
             void move(char, int, unsigned long, CallBackFunction callback);
+            boolean isMoveable();
             void reset();
 
             void attachMotor(Motor*, Motor*);

@@ -50,11 +50,9 @@ void setup() {
   //attachment all peripherals for mobileRobot
   mobileRobot.attachMotor(&motorLeft, &motorRight);
   mobileRobot.attachLedLR(&ledLR);
-  //init for peripherals
-  mobileRobot.init();
-  mobileRobot.info();
 
   //attachment all peripheral for controller
+  controller.attachMobileRobot(&mobileRobot);
   controller.attachGymRecord(&accessGymRecord);
   //init for peripherals
   controller.init();
@@ -65,15 +63,6 @@ void setup() {
 void loop() {
   ledLife.blink(500);
 
-  mobileRobot.move(MOBILE_BACKWARD, gear, 5000, mobileCallback);
   locPan.menu();
+  controller.execute(MODE_GYM);
 }
-
-void mobileCallback(){
-  gear += 1;
-
-  if (gear > MAX_GEAR)gear=0;
-
-  mobileRobot.reset();
-}
-
