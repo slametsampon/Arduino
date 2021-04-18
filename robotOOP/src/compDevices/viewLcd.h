@@ -18,6 +18,7 @@ class ViewLcd
     ViewLcd(LiquidCrystal);//constructor
     void viewMessage(int, int, String);//Tampilkan Pesan pada lcd
     void clearView();//Hapus tampilan pada lcd
+    void info();
   private:
     int _kolom, _baris;
     LiquidCrystal _lcd;

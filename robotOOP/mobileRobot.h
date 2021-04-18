@@ -13,21 +13,6 @@
 
     typedef void (*CallBackFunction) ();
 
-    const int MAX_GEAR = 5;
-
-    //For cmd constants
-    const char MOBILE_FORWARD = 'F';
-    const char MOBILE_BACKWARD = 'B';
-    const char MOBILE_TURN_RIGHT = 'R';
-    const char MOBILE_TURN_LEFT = 'L';
-    const char MOBILE_STOP = 'S';
-    const char MOBILE_UP = 'U';
-    const char MOBILE_DOWN = 'D';
-    const char MOBILE_AROUND_LEFT = 'I';
-    const char MOBILE_AROUND_RIGHT = 'O';
-
-    const char NO_CMD = 'N';
-
     class MobileRobot : public drvCmd{
         public: 
             MobileRobot(String);

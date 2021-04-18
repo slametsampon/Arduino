@@ -44,6 +44,26 @@ All constants for local panel
 
     //menu status
     const int DEFAULT_INDEX = 999;
+    const int MAX_GEAR = 5;
+
+    //For cmd constants
+    const char MOBILE_FORWARD = 'F';
+    const char MOBILE_BACKWARD = 'B';
+    const char MOBILE_TURN_RIGHT = 'R';
+    const char MOBILE_TURN_LEFT = 'L';
+    const char MOBILE_STOP = 'S';
+    const char MOBILE_UP = 'U';
+    const char MOBILE_DOWN = 'D';
+    const char MOBILE_AROUND_LEFT = 'I';
+    const char MOBILE_AROUND_RIGHT = 'O';
+
+    const char MOBILE_LOCAL = 'C';
+    const char MOBILE_REMOTE = 'M';
+    const char MOBILE_LINE_TRACER = 'T';
+    const char MOBILE_AVOIDER = 'V';
+    const char MOBILE_GYM = 'G';
+
+    const char NO_CMD = 'N';
 
     enum{     
         MODE_MAIN, //index 0    

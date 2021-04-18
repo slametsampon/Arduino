@@ -8,8 +8,15 @@
 /* Dependencies */
 #include "viewLcd.h"
 
-ViewLcd::ViewLcd(LiquidCrystal lcd):_lcd(lcd){
+ViewLcd::ViewLcd(LiquidCrystal lcd):_lcd(lcd), _id("ViewLcd"){
     _lcd.begin(LCD_COLUMNS, LCD_ROWS);  
+}
+
+void ViewLcd::info(){
+  Serial.println("ViewLcd::info()");
+  Serial.print("_id : ");
+  Serial.println(_id);
+
 }
 
 void ViewLcd::viewMessage(int baris, int kolom, String pesan){

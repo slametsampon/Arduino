@@ -30,9 +30,14 @@ void LocPan::info(){
   Serial.print("_id : ");
   Serial.println(_id);
 
+  //attachment info
+  Serial.println("Attachment :");
   for (int i=0; i < this->cmdInNbr; i++){
       _cmdInput[i]->info();
   }
+
+  _view->info();
+  _accessMenu->info();
 }
 
 void LocPan::attachCmdIn(command *cmdIn){
