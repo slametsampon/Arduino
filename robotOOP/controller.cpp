@@ -40,6 +40,16 @@ void Controller::attachTrackRecord(AccessCmdRecord *accessTrackRecord){
     _accessTrackRecord = accessTrackRecord;
 }
   
+void Controller::attachModelParameter(AccessParam *accessParameter){
+    Serial.println("Controller::attachModelParameter(AccessParam *accessParameter)");
+    _accessParameter = accessParameter;
+  }
+ 
+void Controller::updateParameter(){
+  _dataParam = _accessParameter->getParam();
+
+}
+
 int Controller::getException(){
     int exp = _exception;
     if (exp != NO_EXCEPTION)_exception = NO_EXCEPTION;

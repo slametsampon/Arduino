@@ -23,7 +23,9 @@ class Controller
     void attachMobileRobot(MobileRobot*);//penggunaan pointer ini sangat mutlak (JIKA TIDAK ERROR !!!!)
     void attachGymRecord(AccessCmdRecord*);//penggunaan pointer ini sangat mutlak (JIKA TIDAK ERROR !!!!)
     void attachTrackRecord(AccessCmdRecord*);//penggunaan pointer ini sangat mutlak (JIKA TIDAK ERROR !!!!)
+    void attachModelParameter(AccessParam*);//penggunaan pointer ini sangat mutlak (JIKA TIDAK ERROR !!!!)
     int getException();
+    void updateParameter();
     void execute(int);
     void serialShowOperationMode();
 
@@ -35,8 +37,10 @@ class Controller
     int _gymStep=0;
 
     AccessCmdRecord *_accessGymRecord, *_accessTrackRecord;
+    AccessParam *_accessParameter;
     cmdRobot *_prevCmd;
     MobileRobot *_mobileRobot;
+    param _dataParam;
 
     void _initGym();
     void _modeGym();

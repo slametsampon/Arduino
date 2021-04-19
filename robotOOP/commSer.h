@@ -38,8 +38,7 @@ float value = doc["value"]; // 51.5
 
 #include    "Arduino.h"
 #include    <SoftwareSerial.h>
-#include    <ArduinoJson.h>
-#include    "src\ioDevices\param.h"
+#include    "src\model\model.h"
 #include    "src\global\robotConstOOP.h"
 
 class CommSer

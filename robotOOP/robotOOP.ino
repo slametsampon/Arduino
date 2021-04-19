@@ -6,14 +6,16 @@
 #include "mobileRobot.h"
 #include "locPan.h"
 #include "controller.h"
+#include "commSer.h"
 
 AnalogInput         keyAnalogIn(PIN_KEYPAD);
 LiquidCrystal       lcd(LCD_RS,LCD_EN,LCD_D4,LCD_D5,LCD_D6,LCD_D7);
 KeyPad              keyPad(&keyAnalogIn);//declare keypad
-serialCmd           serInput("Serial Command");
+serialCmd           serInput("serInput");
 ViewLcd             view(lcd);//declare view, part of MVC pattern
-AccessDataMenu      accessMenu("Data Menu");//part of MVC pattern
-LocPan              locPan("LocPan-Local Panel");//local panel
+AccessDataMenu      accessMenu("accessMenu");//part of MVC pattern
+AccessParam         accessParam("accessParam");//part of MVC pattern
+LocPan              locPan("locPan");//local panel
 
 DigitalOutput ledLife(LED_BUILTIN);
 
@@ -27,11 +29,17 @@ MobileRobot mobileRobot("mobileRobot");
 AccessCmdRecord     accessGymRecord("accessGymRecord");
 Controller  controller("controller");
 
+//Variables declaration for commSer
+CommSer             commSer("commSer");
+
 //Static member class should be initialized FIRST (IF NOT, WILL HAVE ERROR)
 unsigned char       LocPan::cmdInNbr=0;
 unsigned char       AccessDataMenu::menuNbr=0;
 
 int gear = 0;
+
+//function declaration
+void exceptionAct(int);
 
 void setup() {
 
@@ -43,6 +51,7 @@ void setup() {
   locPan.attachCmdIn(&serInput);
   locPan.attachView(&view);
   locPan.attachModelMenu(&accessMenu);
+  locPan.attachModelParameter(&accessParam);
   //init for peripherals
   locPan.init();
   locPan.info();
@@ -65,4 +74,37 @@ void loop() {
 
   locPan.menu();
   controller.execute(MODE_GYM);
+
+  //get exception, and action as per exception code
+  exceptionAct(locPan.getException());//get parameter exception
+  exceptionAct(controller.getException());//get operation exception
+  exceptionAct(commSer.getException());//get remote exception
+
+}
+
+void exceptionAct(int exp){
+  switch (exp)  {
+    case LOCAL_OPERATION_EXCEPTION:
+      commSer.sendValue();
+      break;
+    
+    case LOCAL_PARAMETER_EXCEPTION:
+      //controller.updateParameter();
+      //locPan.updateParameter();
+      //commSer.sendParameter();
+      break;
+
+    case REMOTE_OPERATION_EXCEPTION:
+      //controller.execute();//1. check status controller (getValue, getMode)
+      break;
+    
+    case REMOTE_PARAMETER_EXCEPTION:
+      //controller.updateParameter();
+      //locPan.updateParameter();
+      //controller.execute();//1. check status controller (getValue, getMode)
+      break;
+
+    default:
+      break;
+  }
 }

@@ -9,7 +9,7 @@
 
 #include "Arduino.h"
 #include "signalConst.h"
-#include "param.h"
+#include "..\model\model.h"
 #include "..\global\robotConstOOP.h"
 
     class AnalogInput{

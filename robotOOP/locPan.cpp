@@ -57,10 +57,20 @@ void LocPan::attachModelMenu(AccessDataMenu *accessMenu){
     _accessMenu = accessMenu;
   }
  
+void LocPan::attachModelParameter(AccessParam *accessParameter){
+    Serial.println("LocPan::attachModelParameter(AccessParam *accessParameter)");
+    _accessParameter = accessParameter;
+  }
+ 
 int LocPan::getException(){
     int exp = _exception;
     if (exp != NO_EXCEPTION)_exception = NO_EXCEPTION;
     return exp;
+}
+
+void LocPan::updateParameter(){
+  _dataParam = _accessParameter->getParam();
+
 }
 
 void LocPan::menu(){
