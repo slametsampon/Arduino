@@ -59,7 +59,7 @@ int Controller::getException(){
 void Controller::execute(int operationMode){
 
   if(_operationMode != operationMode){
-  _exception = LOCAL_OPERATION_EXCEPTION;
+  _exception = LOCAL_MODE_EXCEPTION;
   _operationMode = operationMode;
   }
   switch (_operationMode){
@@ -71,6 +71,10 @@ void Controller::execute(int operationMode){
     default:
       break;
   }
+}
+
+String Controller::getOperationMode(){
+  return _operationModeStr;
 }
 
 void Controller::serialShowOperationMode(){

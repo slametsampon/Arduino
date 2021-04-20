@@ -91,7 +91,7 @@ void CommSer::_getData(){
           }
           else if (obj["header"] == DATA_OPERATION){
             _accessParameter->setOperationJson(obj);//2. Remote operation
-            _exception = REMOTE_OPERATION_EXCEPTION;
+            _exception = REMOTE_MODE_EXCEPTION;
           }
         } 
       else 

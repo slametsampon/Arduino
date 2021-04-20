@@ -30,7 +30,7 @@ AccessCmdRecord     accessGymRecord("accessGymRecord");
 Controller  controller("controller");
 
 //Variables declaration for commSer
-CommSer             commSer("commSer");
+CommSer     commSer("commSer");
 
 //Static member class should be initialized FIRST (IF NOT, WILL HAVE ERROR)
 unsigned char       LocPan::cmdInNbr=0;
@@ -84,7 +84,7 @@ void loop() {
 
 void exceptionAct(int exp){
   switch (exp)  {
-    case LOCAL_OPERATION_EXCEPTION:
+    case LOCAL_MODE_EXCEPTION:
       commSer.sendValue();
       break;
     
@@ -94,7 +94,7 @@ void exceptionAct(int exp){
       //commSer.sendParameter();
       break;
 
-    case REMOTE_OPERATION_EXCEPTION:
+    case REMOTE_MODE_EXCEPTION:
       //controller.execute();//1. check status controller (getValue, getMode)
       break;
     

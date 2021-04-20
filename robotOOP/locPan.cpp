@@ -8,14 +8,19 @@
 
 //global function
 LocPan::LocPan(String id):_id(id){
-
-  _modeMenu = MODE_MAIN;
-  _menuIndex = 0;
-  this->_initPrevIndex();
-
+  this->init();
 }
 
 void LocPan::init(){
+
+  _modeMenu = MODE_MAIN;
+  _menuIndex = 0;
+
+  _prevCmd = NO_KEY;
+  _prevLocalCmd = NO_KEY;
+
+  this->_initPrevIndex();
+
   for (int i=0; i < this->cmdInNbr; i++){
       _cmdInput[i]->init();
   }
@@ -126,35 +131,78 @@ void LocPan::_menuMain(char key){
 
   switch (key) // See which menu item is selected and execute that correS_Pond function
     {
-        case 'S':
-          //Tempatkan menu di sini
-          break;
+      case SELECT:
+        //Tempatkan menu di sini
+        break;
 
-        case 'U':
-          //naikkan index
-          idx = this->_increaseIndex();
-          this->_sendMenu(idx);//kirim menu ke serial port
-          this->_viewMenu(idx);//tampilkan menu ke lcd
-          break;
+      case UP:
+        //naikkan index
+        idx = this->_increaseIndex();
+        this->_sendMenu(idx);//kirim menu ke serial port
+        this->_viewMenu(idx);//tampilkan menu ke lcd
+        break;
 
-        case 'D':
-          //Turunkan index
-          idx = this->_decreaseIndex();
-          this->_sendMenu(idx);//kirim menu ke serial port
-          this->_viewMenu(idx);//tampilkan menu ke lcd
-          break;
+      case DOWN:
+        //Turunkan index
+        idx = this->_decreaseIndex();
+        this->_sendMenu(idx);//kirim menu ke serial port
+        this->_viewMenu(idx);//tampilkan menu ke lcd
+        break;
 
-        case 'L':
-          //Tempatkan menu di sini
-          break;
+      case LEFT:
+        //Tempatkan menu di sini
+        break;
 
-        case 'R':
-          //ke menu parameter
-          break;
+      case RIGHT:
+        if (idx == MODE_LOCAL){
+          _exception = LOCAL_MODE_EXCEPTION;
+          this->_menuLocal(SELECT);//S : Stop
+        }
+        break;
 
-        case 'N'://No Key
-        default:
-          break;
+      case NO_KEY://No Key
+      default:
+        break;
+    }
+}
+
+void LocPan::_menuLocal(char key){
+
+  _view->viewMessage(0,0,"LOCAL MENU");
+  switch (key) // See which menu item is selected and execute that correS_Pond function
+    {
+      case SELECT:
+        if (_prevLocalCmd == SELECT){
+          _exception = MAIN_MODE_EXCEPTION;
+          _modeMenu = MODE_MAIN;
+          _menuIndex = 0;
+          this->menu();
+        }
+        else{
+          _view->viewMessage(1,0,"Stop");
+        }
+
+        break;
+
+      case UP:
+        //naikkan index
+        break;
+
+      case DOWN:
+        //Turunkan index
+        break;
+
+      case LEFT:
+        //Tempatkan menu di sini
+        break;
+
+      case RIGHT:
+        //ke menu parameter
+        break;
+
+      case NO_KEY://No Key
+      default:
+        break;
     }
 }
 

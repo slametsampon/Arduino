@@ -28,6 +28,7 @@ class Controller
     void updateParameter();
     void execute(int);
     void serialShowOperationMode();
+    String getOperationMode();
 
   private:
 

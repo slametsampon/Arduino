@@ -37,7 +37,7 @@ class LocPan
     ViewLcd    *_view;
     param _dataParam;
 
-    char _prevCmd;
+    char _prevCmd, _prevLocalCmd;
     int _modeMenu = MODE_MAIN;
     int _menuIndex, _prevMenuIndex, _paramIndex, _prevParamIndex;
     int _exception = NO_EXCEPTION;
@@ -53,6 +53,10 @@ class LocPan
     void _decreaseParameter(int);
     char _getCommand();
     void _menuMain(char);
+    void _menuLocal(char);
+    void _menuGym(char);
+    void _menuLineTracer(char);
+    void _menuAvoider(char);
     void _menuParameter(char);
     void _menuChangeParameter(char);
     void _initPrevIndex();

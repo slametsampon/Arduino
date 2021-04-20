@@ -37,10 +37,14 @@ All constants for local panel
 
     //Exception code
     const int NO_EXCEPTION = 0;
-    const int LOCAL_OPERATION_EXCEPTION = 1;//change on value or operation mode
-    const int LOCAL_PARAMETER_EXCEPTION = 2;//change on parameter
-    const int REMOTE_OPERATION_EXCEPTION = 3;//change on value or operation mode remotely
-    const int REMOTE_PARAMETER_EXCEPTION = 4;//change on parameter remotely
+    const int MAIN_MODE_EXCEPTION = 1;
+    const int LOCAL_MODE_EXCEPTION = 2;
+    const int REMOTE_MODE_EXCEPTION = 3;
+    const int GYM_MODE_EXCEPTION = 4;
+    const int LINE_TRACER_MODE_EXCEPTION = 5;
+    const int AVOIDER_MODE_EXCEPTION = 6;
+    const int REMOTE_PARAMETER_EXCEPTION = 7;
+    const int LOCAL_PARAMETER_EXCEPTION = 8;
 
     //menu status
     const int DEFAULT_INDEX = 999;
