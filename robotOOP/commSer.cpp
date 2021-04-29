@@ -23,6 +23,11 @@ void CommSer::attachModelParameter(AccessParam *accessParameter){
     _accessParameter = accessParameter;
   }
   
+void CommSer::attachModelCommonData(AccessCommonData *accessCommonData){
+    Serial.println("CommSer::attachModelCommonData(AccessCommonData *accessCommonData)");
+    _accessCommonData = accessCommonData;
+  }
+ 
 void CommSer::attachSoftwareSerial(SoftwareSerial *softSerial){
     Serial.println("CommSer::attachSoftwareSerial(SoftwareSerial *softSerial)");
     _linkSerial = softSerial;

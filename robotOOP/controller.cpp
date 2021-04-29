@@ -50,6 +50,11 @@ void Controller::updateParameter(){
 
 }
 
+void Controller::attachModelCommonData(AccessCommonData *accessCommonData){
+    Serial.println("Controller::attachModelCommonData(AccessCommonData *accessCommonData)");
+    _accessCommonData = accessCommonData;
+  }
+ 
 int Controller::getException(){
     int exp = _exception;
     if (exp != NO_EXCEPTION)_exception = NO_EXCEPTION;

@@ -189,6 +189,7 @@ void AccessParam::setOperationJson(JsonObject paramJson){
 }
 
 void AccessParam::info(){
+  Serial.println("AccessParam::info()");
 
   JsonObject paramJson = this->getJson();
 
@@ -311,4 +312,41 @@ void AccessParam::setOperationMode(int operationMode){
 
 int AccessParam::getOperationMode(){
   return _operationMode;
+}
+
+//AccessParam - Class
+AccessCommonData::AccessCommonData(String id):_id(id){}
+
+int AccessCommonData::getMenuIndex(){
+  return _menuIndex;
+}
+
+void AccessCommonData::setMenuIndex(int menuIndex){
+  _menuIndex = menuIndex;
+}
+
+cmdRobot AccessCommonData::getCmd(){
+  return _cmd;
+}
+
+void AccessCommonData::setCmd(cmdRobot cmd){
+  _cmd = cmd;
+}
+
+void AccessCommonData::info(){
+  Serial.println("AccessCommonData::info()");
+  Serial.print("_menuIndex : ");
+  Serial.println(_menuIndex);
+
+  Serial.print("_cmd.cmd : ");
+  Serial.println(_cmd.cmd);
+
+  Serial.print("_cmd.gear : ");
+  Serial.println(_cmd.gear);
+
+  Serial.print("_cmd.milliS : ");
+  Serial.println(_cmd.milliS);
+
+  Serial.println(" ");
+
 }

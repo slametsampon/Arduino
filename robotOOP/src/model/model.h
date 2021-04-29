@@ -10,7 +10,17 @@
 
   #include "Arduino.h"
   #include  <ArduinoJson.h>
-  #include "..\global\robotConstOOP.h"
+
+      enum{     
+        MODE_MAIN, //index 0    
+        MODE_LOCAL, //index 1    
+        MODE_REMOTE, //index 2    
+        MODE_GYM, //index 3    
+        MODE_LINE_TRACER, //index 4    
+        MODE_AVOIDER, //index 5    
+        //! leave this one
+        MAX_MENU 
+    };
 
   const int PARAMETER_VALUE = 0;
   const int PARAMETER_LOW_RANGE = 1;
@@ -107,4 +117,19 @@
       int _operationMode;
 
   };//end of class
+
+  class AccessCommonData{
+    public:
+      AccessCommonData(String );
+      int getMenuIndex();
+      void setMenuIndex(int);
+      cmdRobot getCmd();
+      void setCmd(cmdRobot);
+      void info();
+    private:
+      String    _id;
+      int       _menuIndex;
+      cmdRobot  _cmd;
+  };//end of class
+
 #endif

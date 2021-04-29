@@ -23,9 +23,13 @@ class LocPan
     void attachView(ViewLcd*);//Pasang View, penggunaan pointer ini sangat mutlak (JIKA TIDAK ERROR !!!!)
     void attachModelMenu(AccessDataMenu*);//Pasang Model menu, penggunaan pointer ini sangat mutlak (JIKA TIDAK ERROR !!!!)
     void attachModelParameter(AccessParam*);//Pasang Model Parameter, penggunaan pointer ini sangat mutlak (JIKA TIDAK ERROR !!!!)
+    void attachModelCommonData(AccessCommonData*);//Penggunaan pointer ini sangat mutlak (JIKA TIDAK ERROR !!!!)
     void updateParameter();
-    void menu();
+    int menu();
     int getException();
+    char getCommand();
+    char getLocalCommand();
+    int getMenuMode();
     void init();
     void info();
 
@@ -33,11 +37,12 @@ class LocPan
     String _id;
     AccessDataMenu *_accessMenu;
     AccessParam *_accessParameter;
+    AccessCommonData *_accessCommonData;
     command *_cmdInput[MAX_CMD_INPUT];
     ViewLcd    *_view;
     param _dataParam;
 
-    char _prevCmd, _prevLocalCmd;
+    char _prevCmd, _localCmd;
     int _modeMenu = MODE_MAIN;
     int _menuIndex, _prevMenuIndex, _paramIndex, _prevParamIndex;
     int _exception = NO_EXCEPTION;
@@ -51,7 +56,6 @@ class LocPan
     int _decreaseIndex();
     void _increaseParameter(int);
     void _decreaseParameter(int);
-    char _getCommand();
     void _menuMain(char);
     void _menuLocal(char);
     void _menuGym(char);

@@ -69,15 +69,4 @@ All constants for local panel
 
     const char NO_CMD = 'N';
 
-    enum{     
-        MODE_MAIN, //index 0    
-        MODE_LOCAL, //index 1    
-        MODE_REMOTE, //index 2    
-        MODE_GYM, //index 3    
-        MODE_LINE_TRACER, //index 4    
-        MODE_AVOIDER, //index 5    
-        //! leave this one
-        MAX_MENU 
-    };
-
 #endif

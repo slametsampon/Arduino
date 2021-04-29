@@ -17,7 +17,7 @@ void LocPan::init(){
   _menuIndex = 0;
 
   _prevCmd = NO_KEY;
-  _prevLocalCmd = NO_KEY;
+  _localCmd = NO_KEY;
 
   this->_initPrevIndex();
 
@@ -67,6 +67,11 @@ void LocPan::attachModelParameter(AccessParam *accessParameter){
     _accessParameter = accessParameter;
   }
  
+void LocPan::attachModelCommonData(AccessCommonData *accessCommonData){
+    Serial.println("LocPan::attachModelCommonData(AccessCommonData *accessCommonData)");
+    _accessCommonData = accessCommonData;
+  }
+ 
 int LocPan::getException(){
     int exp = _exception;
     if (exp != NO_EXCEPTION)_exception = NO_EXCEPTION;
@@ -78,9 +83,21 @@ void LocPan::updateParameter(){
 
 }
 
-void LocPan::menu(){
+char LocPan::getCommand(){
+  char rawCmd = NO_KEY;
+  for (int i=0; i < this->cmdInNbr; i++){
+      rawCmd = _cmdInput[i]->getCode();
+      if (rawCmd != NO_KEY){
+          _prevCmd = rawCmd;
+          break;
+      }
+  }
+  return rawCmd;
+}
 
-  char key = this->_getCommand();
+int LocPan::menu(){
+
+  char key = this->getCommand();
 
   switch (_modeMenu){
     case MODE_MAIN:
@@ -107,10 +124,10 @@ void LocPan::menu(){
       //this->_menuChangeParameter(key);
       break;
       
-    case 'N':
     default:
         break;
   }
+  return _modeMenu;
 }
 
 //private function
@@ -156,6 +173,7 @@ void LocPan::_menuMain(char key){
       case RIGHT:
         if (idx == MODE_LOCAL){
           _exception = LOCAL_MODE_EXCEPTION;
+          _localCmd = NO_KEY;
           this->_menuLocal(SELECT);//S : Stop
         }
         break;
@@ -172,50 +190,43 @@ void LocPan::_menuLocal(char key){
   switch (key) // See which menu item is selected and execute that correS_Pond function
     {
       case SELECT:
-        if (_prevLocalCmd == SELECT){
+        if (_localCmd == SELECT){
           _exception = MAIN_MODE_EXCEPTION;
           _modeMenu = MODE_MAIN;
           _menuIndex = 0;
           this->menu();
         }
         else{
-          _view->viewMessage(1,0,"Stop");
+          _localCmd = MOBILE_STOP;
+          _view->viewMessage(1,0,"MOBILE_STOP");
         }
 
         break;
 
       case UP:
-        //naikkan index
+          _localCmd = MOBILE_FORWARD;
+          _view->viewMessage(1,0,"MOBILE_FORWARD");
         break;
 
       case DOWN:
-        //Turunkan index
+          _localCmd = MOBILE_BACKWARD;
+          _view->viewMessage(1,0,"MOBILE_BACKWARD");
         break;
 
       case LEFT:
-        //Tempatkan menu di sini
+          _localCmd = MOBILE_TURN_LEFT;
+          _view->viewMessage(1,0,"MOBILE_TURN_LEFT");
         break;
 
       case RIGHT:
-        //ke menu parameter
+          _localCmd = MOBILE_TURN_RIGHT;
+          _view->viewMessage(1,0,"MOBILE_TURN_RIGHT");
         break;
 
       case NO_KEY://No Key
       default:
         break;
     }
-}
-
-char LocPan::_getCommand(){
-  char rawCmd = NO_KEY;
-  for (int i=0; i < this->cmdInNbr; i++){
-      rawCmd = _cmdInput[i]->getCode();
-      if (rawCmd != NO_KEY){
-          _prevCmd = rawCmd;
-          break;
-      }
-  }
-  return rawCmd;
 }
 
 void LocPan::_viewMenu(int index){

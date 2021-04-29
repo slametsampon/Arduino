@@ -32,11 +32,14 @@ Controller  controller("controller");
 //Variables declaration for commSer
 CommSer     commSer("commSer");
 
+AccessCommonData  accessCommonData("accessCommonData");//part of MVC pattern
+
 //Static member class should be initialized FIRST (IF NOT, WILL HAVE ERROR)
 unsigned char       LocPan::cmdInNbr=0;
 unsigned char       AccessDataMenu::menuNbr=0;
 
 int gear = 0;
+int operationMode;
 
 //function declaration
 void exceptionAct(int);
@@ -52,6 +55,7 @@ void setup() {
   locPan.attachView(&view);
   locPan.attachModelMenu(&accessMenu);
   locPan.attachModelParameter(&accessParam);
+  locPan.attachModelCommonData(&accessCommonData);
   //init for peripherals
   locPan.init();
   locPan.info();
@@ -63,6 +67,7 @@ void setup() {
   //attachment all peripheral for controller
   controller.attachMobileRobot(&mobileRobot);
   controller.attachGymRecord(&accessGymRecord);
+  controller.attachModelCommonData(&accessCommonData);
   //init for peripherals
   controller.init();
   controller.info();
@@ -72,8 +77,8 @@ void setup() {
 void loop() {
   ledLife.blink(500);
 
-  locPan.menu();
-  controller.execute(MODE_GYM);
+  operationMode = locPan.menu();
+  controller.execute(operationMode);
 
   //get exception, and action as per exception code
   exceptionAct(locPan.getException());//get parameter exception
@@ -85,7 +90,7 @@ void loop() {
 void exceptionAct(int exp){
   switch (exp)  {
     case LOCAL_MODE_EXCEPTION:
-      commSer.sendValue();
+      //commSer.sendValue();
       break;
     
     case LOCAL_PARAMETER_EXCEPTION:

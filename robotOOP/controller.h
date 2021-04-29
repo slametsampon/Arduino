@@ -24,6 +24,7 @@ class Controller
     void attachGymRecord(AccessCmdRecord*);//penggunaan pointer ini sangat mutlak (JIKA TIDAK ERROR !!!!)
     void attachTrackRecord(AccessCmdRecord*);//penggunaan pointer ini sangat mutlak (JIKA TIDAK ERROR !!!!)
     void attachModelParameter(AccessParam*);//penggunaan pointer ini sangat mutlak (JIKA TIDAK ERROR !!!!)
+    void attachModelCommonData(AccessCommonData*);//Penggunaan pointer ini sangat mutlak (JIKA TIDAK ERROR !!!!)
     int getException();
     void updateParameter();
     void execute(int);
@@ -39,6 +40,7 @@ class Controller
 
     AccessCmdRecord *_accessGymRecord, *_accessTrackRecord;
     AccessParam *_accessParameter;
+    AccessCommonData *_accessCommonData;
     cmdRobot *_prevCmd;
     MobileRobot *_mobileRobot;
     param _dataParam;

@@ -49,6 +49,7 @@ class CommSer
     void info();
     void sendValue();
     void sendParameter();
+    void attachModelCommonData(AccessCommonData*);//Penggunaan pointer ini sangat mutlak (JIKA TIDAK ERROR !!!!)
     void attachModelParameter(AccessParam*);//Pasang Model parameter, penggunaan pointer ini sangat mutlak (JIKA TIDAK ERROR !!!!)
     void attachSoftwareSerial(SoftwareSerial*);//Pasang SoftwareSerial, penggunaan pointer ini sangat mutlak (JIKA TIDAK ERROR !!!!)
     int getException();
@@ -60,6 +61,7 @@ class CommSer
     int _exception = NO_EXCEPTION;
 
     AccessParam *_accessParameter;
+    AccessCommonData *_accessCommonData;
     param _dataParam;
     SoftwareSerial *_linkSerial; // RX, TX
 
