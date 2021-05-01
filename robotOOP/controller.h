@@ -35,7 +35,7 @@ class Controller
 
     String _id, _operationModeStr;
     int _exception = NO_EXCEPTION;
-    int _operationMode = MODE_LOCAL;
+    int _operationMode = MODE_MANUAL;
     int _gymStep=0;
 
     AccessCmdRecord *_accessGymRecord, *_accessTrackRecord;

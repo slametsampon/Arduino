@@ -14,6 +14,7 @@ LocPan::LocPan(String id):_id(id){
 void LocPan::init(){
 
   _modeMenu = MODE_MAIN;
+  _accessCommonData->setMenuIndex(_modeMenu);
   _menuIndex = 0;
 
   _prevCmd = NO_KEY;
@@ -104,12 +105,8 @@ int LocPan::menu(){
       this->_menuMain(key);
       break;
 
-    case MODE_LOCAL:
+    case MODE_MANUAL:
       //this->_menuParameter(key);
-      break;
-
-    case MODE_REMOTE:
-      //this->_menuChangeParameter(key);
       break;
 
     case MODE_GYM:
@@ -171,11 +168,10 @@ void LocPan::_menuMain(char key){
         break;
 
       case RIGHT:
-        if (idx == MODE_LOCAL){
-          _exception = LOCAL_MODE_EXCEPTION;
-          _localCmd = NO_KEY;
-          this->_menuLocal(SELECT);//S : Stop
-        }
+        _modeMenu = MODE_MANUAL;
+        _accessCommonData->setMenuIndex(_modeMenu);
+        _exception = LOCAL_MODE_EXCEPTION;
+        this->_menuManual(SELECT);//S : Stop
         break;
 
       case NO_KEY://No Key
@@ -184,9 +180,9 @@ void LocPan::_menuMain(char key){
     }
 }
 
-void LocPan::_menuLocal(char key){
+void LocPan::_menuManual(char key){
 
-  _view->viewMessage(0,0,"LOCAL MENU");
+  _view->viewMessage(0,0,"MENU Manual");
   switch (key) // See which menu item is selected and execute that correS_Pond function
     {
       case SELECT:

@@ -11,15 +11,14 @@
   #include "Arduino.h"
   #include  <ArduinoJson.h>
 
-      enum{     
-        MODE_MAIN, //index 0    
-        MODE_LOCAL, //index 1    
-        MODE_REMOTE, //index 2    
-        MODE_GYM, //index 3    
-        MODE_LINE_TRACER, //index 4    
-        MODE_AVOIDER, //index 5    
-        //! leave this one
-        MAX_MENU 
+    enum{     
+      MODE_MAIN, //index 0    
+      MODE_MANUAL, //index 1    
+      MODE_GYM, //index 2    
+      MODE_LINE_TRACER, //index 3    
+      MODE_AVOIDER, //index 4    
+      //! leave this one
+      MAX_MENU 
     };
 
   const int PARAMETER_VALUE = 0;

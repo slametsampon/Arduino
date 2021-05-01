@@ -57,7 +57,7 @@ class LocPan
     void _increaseParameter(int);
     void _decreaseParameter(int);
     void _menuMain(char);
-    void _menuLocal(char);
+    void _menuManual(char);
     void _menuGym(char);
     void _menuLineTracer(char);
     void _menuAvoider(char);
