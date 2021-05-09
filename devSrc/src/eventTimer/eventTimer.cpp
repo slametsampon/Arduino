@@ -126,7 +126,9 @@ boolean EventTimer::execute(){
 	if (_isInputAvailable){
 		_isEnable = _digInput->isStatus(150);//de-bouncing for milli second
 		if (!_isEnable)_prevDelayMilli = 0;
-		else _prevDelayMilli = millis();
+		else{
+			if (_prevDelayMilli <= 0)_prevDelayMilli = millis();
+		}
 	}
 
 	if(!_isEnable) {
@@ -142,6 +144,12 @@ boolean EventTimer::execute(){
 			else{
 				_prevStatus = false;
 				status = false;
+				_prevDelayMilli = 0;
+				//cyclic
+				if (_isCyclic){
+					_isEnable = true;
+					_prevDelayMilli = millis();
+				}
 			}
 		}
 		
@@ -150,15 +158,15 @@ boolean EventTimer::execute(){
 			if(_prevDurationMilli == 0)_prevDurationMilli = millis();
 			if((millis() - _prevDurationMilli) <= _durationMilli)status = true;
 			else{
+				status = false;
 				_isEnable = false;
 				_prevDelayMilli = 0;
+				//cyclic
+				if (_isCyclic){
+					_isEnable = true;
+					_prevDelayMilli = millis();
+				}
 			}
-		}
-
-		//cyclic
-		if (_isCyclic){
-			_isEnable = true;
-			_prevDelayMilli = millis();
 		}
 	}
 
