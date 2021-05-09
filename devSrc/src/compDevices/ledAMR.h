@@ -14,9 +14,9 @@
 
 //const unsigned long DEBOUNCE_PB = 150;//milli second
 
-#include "Arduino.h"
+#include <Arduino.h>
+#include "compDevicesConst.h"
 #include "..\ioDevices\DigitalOutput.h"
-#include "..\global\arduinoUnoConst.h"
 
     class LedAMR{
         public:

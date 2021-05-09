@@ -8,7 +8,7 @@
 #define digitalInput_h
 
 #include "Arduino.h"
-#include "signalConst.h"
+#include "ioDevicesConst.h"
 
     class DigitalInput{
         public: 
@@ -23,5 +23,6 @@
             unsigned long  _prevMilli;
             String  _id, _device;
             boolean _digTyp = REVERSE_TYPE;
+            boolean _prevStatus = false;
     };
 #endif

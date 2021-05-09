@@ -24,7 +24,7 @@ void EventTimer::init(){
 	_durationMilli = 0;
 
   _digInput->init(REVERSE_TYPE,"_digInput");
-  _digOutput->init(REVERSE_TYPE,"_digOutput");
+  _digOutput->init(FORWARD_TYPE,"_digOutput");
 }
 
 void EventTimer::init(boolean typ){
@@ -33,7 +33,7 @@ void EventTimer::init(boolean typ){
 	_isOutputAvailable = true;
 
   _digInput->init(typ,"_digInput");
-  _digOutput->init(typ,"_digOutput");
+  _digOutput->init(FORWARD_TYPE,"_digOutput");
 }
 
 void EventTimer::info(){
@@ -44,6 +44,7 @@ void EventTimer::info(){
 
 	Serial.print("_isOneShoot : ");
 	Serial.println(_isOneShoot);
+  	Serial.println("");
 
     if (_isInputAvailable) _digInput->info();
     if (_isOutputAvailable)_digOutput->info();
@@ -128,7 +129,10 @@ boolean EventTimer::execute(){
 		else _prevDelayMilli = millis();
 	}
 
-	if(!_isEnable) return status;
+	if(!_isEnable) {
+		if (_isOutputAvailable)this->_setOutput(status);
+		return status;
+	}
 
 	//logic
 	if ((millis() - _prevDelayMilli) > _delayMilli){

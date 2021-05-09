@@ -8,7 +8,7 @@
 #define DigitalOutput_h
 
 #include "Arduino.h"
-#include "signalConst.h"
+#include "ioDevicesConst.h"
 
   class DigitalOutput{
     public: 

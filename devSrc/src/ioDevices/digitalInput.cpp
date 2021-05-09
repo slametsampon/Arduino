@@ -28,10 +28,22 @@ void DigitalInput::init(boolean type, String id){
 
 boolean DigitalInput::isStatus(){
 
-  if (_digTyp == REVERSE_TYPE)return (!digitalRead(_pin));
-
-  else return (digitalRead(_pin));
-  
+  boolean sts = digitalRead(_pin);
+  if (sts != _prevStatus){
+    _prevStatus = sts;
+    Serial.print(_id);
+    Serial.print(" : ");
+    if (_digTyp == REVERSE_TYPE){
+      if (!sts)Serial.println("Active");
+      else Serial.println("Inactive");
+      return (!sts);
+    }
+    else{
+      if (sts)Serial.println("Active");
+      else Serial.println("Inactive");
+      return (sts);
+    }
+  }
 }
 
 boolean DigitalInput::isStatus(unsigned long holdTime){
@@ -62,9 +74,11 @@ void DigitalInput::info(){
   Serial.print("Pin : ");
   Serial.println(_pin);
 
-  Serial.print("Value : ");
-  if (this->isStatus()) Serial.println("On");
-  else Serial.println("Off");
+  Serial.print("Type : ");
+  if (_digTyp == FORWARD_TYPE) Serial.println("FORWARD");
+  else Serial.println("REVERSE");
+
+  this->isStatus();
 
   Serial.println("");
 }

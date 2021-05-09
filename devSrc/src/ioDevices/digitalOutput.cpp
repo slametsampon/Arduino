@@ -26,11 +26,9 @@ void DigitalOutput::init(boolean actType, String id){
 }
 
 boolean DigitalOutput::isStatus(){
-
-  if (_actionType == REVERSE_TYPE)return (!digitalRead(_pin));
-
-  else return (digitalRead(_pin));
-  
+  boolean sts = digitalRead(_pin);
+  if (_actionType == REVERSE_TYPE) return (!sts);
+  else return sts;
 }
 
 void DigitalOutput::on(){

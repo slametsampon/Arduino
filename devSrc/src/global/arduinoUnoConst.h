@@ -27,15 +27,6 @@ All constants for local panel
     const int MODE_CHANGE_PARAMETER = 3;
     const int DEFAULT_INDEX = 999;
 
-    //Operation mode
-    const int MODE_READY = 0;
-    const int MODE_AUTO = 1;
-    const int MODE_AUTO_ON = 2;
-    const int MODE_MANUAL = 3;
-    const int MODE_MANUAL_ON = 4;
-    const int MODE_RESET = 5;
-    const int MODE_TEST = 99;
-
     //Exception code
     const int NO_EXCEPTION = 0;
     const int LOCAL_OPERATION_EXCEPTION = 1;//change on value or operation mode

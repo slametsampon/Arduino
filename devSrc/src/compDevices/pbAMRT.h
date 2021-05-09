@@ -13,9 +13,11 @@
 
 //const unsigned long DEBOUNCE_PB = 150;//milli second
 
-#include "Arduino.h"
-#include "..\ioDevices\digitalInput.h"
-#include "..\global\arduinoUnoConst.h"
+#include <Arduino.h>
+#include "compDevicesConst.h"
+#include "../global/arduinoUnoConst.h"
+#include "../ioDevices/digitalInput.h"
+#include "../ioDevices/digitalOutput.h"
 
     class PbAMRT{
         public:

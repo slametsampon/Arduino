@@ -45,7 +45,7 @@ float increment = doc["increment"]; // 1.1
 
 #include "Arduino.h"
 #include  <ArduinoJson.h>
-#include "..\ioDevices\signalConst.h"
+#include "..\ioDevices\ioDevicesConst.h"
 #include "..\global\arduinoUnoConst.h"
 
   const int PARAMETER_VALUE = 0;

@@ -8,7 +8,7 @@
 #define analogInput_h
 
 #include "Arduino.h"
-#include "signalConst.h"
+#include "ioDevicesConst.h"
 #include "..\model\model.h"
 #include "..\global\arduinoUnoConst.h"
 
