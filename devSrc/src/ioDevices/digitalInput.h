@@ -23,6 +23,6 @@
             unsigned long  _prevMilli;
             String  _id, _device;
             boolean _digTyp = REVERSE_TYPE;
-            boolean _prevStatus = false;
+            boolean _prevStatus, _isFirst;
     };
 #endif

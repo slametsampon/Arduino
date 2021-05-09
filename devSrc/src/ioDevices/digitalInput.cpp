@@ -14,6 +14,8 @@ DigitalInput::DigitalInput(int pin):_pin(pin), _id("DigitalInput"), _digTyp(REVE
 
 void DigitalInput::init(boolean typ){
   _digTyp = typ;
+  _isFirst = false;
+  _prevStatus = false;
 
   if(_digTyp == FORWARD_TYPE)pinMode(_pin, INPUT);
   else pinMode(_pin, INPUT_PULLUP);
@@ -29,6 +31,11 @@ void DigitalInput::init(boolean type, String id){
 boolean DigitalInput::isStatus(){
 
   boolean sts = digitalRead(_pin);
+  if (!_isFirst){
+    _isFirst = true;
+    if(REVERSE_TYPE)return(!sts)
+    else return sts;
+  }
   if (sts != _prevStatus){
     _prevStatus = sts;
     Serial.print(_id);
