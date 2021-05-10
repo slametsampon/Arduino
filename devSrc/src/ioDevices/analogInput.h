@@ -30,6 +30,5 @@
             String  _id, _device;
             boolean _pullUp;
             param _dataParam;
-            AccessParam *_accessParameter;
     };
 #endif
