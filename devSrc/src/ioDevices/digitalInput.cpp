@@ -43,10 +43,12 @@ boolean DigitalInput::isStatus(unsigned long holdTime){
   if (this->_prevStatus != status){
     this->_prevMilli = millis();
     this->_prevStatus = status;
+    /*
     Serial.print(_id);
     Serial.print(" : ");
     if (status)Serial.println("Active");
     else Serial.println("Inactive");
+    */
   }
 
   else {
