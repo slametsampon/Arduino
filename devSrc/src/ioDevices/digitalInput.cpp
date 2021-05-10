@@ -29,45 +29,35 @@ void DigitalInput::init(boolean type, String id){
   }
 
 boolean DigitalInput::isStatus(){
-
   boolean sts = digitalRead(_pin);
-  if (!_isFirst){
-    _isFirst = true;
-    if(REVERSE_TYPE)return(!sts)
-    else return sts;
-  }
-  if (sts != _prevStatus){
-    _prevStatus = sts;
-    Serial.print(_id);
-    Serial.print(" : ");
-    if (_digTyp == REVERSE_TYPE){
-      if (!sts)Serial.println("Active");
-      else Serial.println("Inactive");
-      return (!sts);
-    }
-    else{
-      if (sts)Serial.println("Active");
-      else Serial.println("Inactive");
-      return (sts);
-    }
-  }
+
+  if (_digTyp == REVERSE_TYPE)return (!sts);
+  else return (sts);
 }
 
 boolean DigitalInput::isStatus(unsigned long holdTime){
-  boolean validSts = false;
+  boolean stsReturn;
+  boolean status = this->isStatus();
 
-  if (this->isStatus()){
-    if (_prevMilli == 0){
-      _prevMilli = millis();//Transition for new command
-    }
-    else {
-      if ((millis() - _prevMilli) >= holdTime){
-        validSts = true;
-        _prevMilli = 0;
-      }
+  //debouncing mechanism
+  if (this->_prevStatus != status){
+    this->_prevMilli = millis();
+    this->_prevStatus = status;
+    Serial.print(_id);
+    Serial.print(" : ");
+    if (status)Serial.println("Active");
+    else Serial.println("Inactive");
+  }
+
+  else {
+    if ((millis() - this->_prevMilli) >= holdTime){
+      this->_prevMilli = millis();
+      this->_prevStatus = status;
+      stsReturn = status;
     }
   }
-  return validSts;
+
+  return stsReturn;
 }
 
 void DigitalInput::info(){

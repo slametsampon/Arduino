@@ -15,16 +15,17 @@ void setup() {
     ledLife.init(FORWARD_TYPE,"ledLife");
     ledLife.info();
 
-    eventTimer.setDelay(5000);
-    eventTimer.setDuration(500);
+    eventTimer.setDelay(5555);
+    eventTimer.setDuration(2555);
     eventTimer.attachInput(&switchExt);
     eventTimer.attachOutput(&ledExt);
     eventTimer.init(REVERSE_TYPE);
+    eventTimer.setOneShoot(true);
     eventTimer.info();
 }
 
 // the loop function runs over and over again forever
 void loop() {
     ledLife.blink(BLINK_NORMAL);
-    eventTimer.execute();
+    if (eventTimer.execute())Serial.println("eventTimer=>OneShoot");
 }

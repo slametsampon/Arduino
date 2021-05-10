@@ -13,9 +13,8 @@ EventTimer::EventTimer(String id):_id(id){
 
 void EventTimer::init(){
 	_isEnable = true;
-	_prevDelayMilli = millis();
-	_isInputAvailable = true;
-	_isOutputAvailable = true;
+	_isInputAvailable = false;
+	_isOutputAvailable = false;
 	_isCyclic = false;
 	_isOneShoot = false;
 	_prevStatus = false;
@@ -49,17 +48,25 @@ void EventTimer::info(){
     if (_isInputAvailable) _digInput->info();
     if (_isOutputAvailable)_digOutput->info();
 
-	Serial.print("Delay Setting (H:M:S) : ");
+	Serial.print("Delay Setting (H:M:S:mS) : ");
 	Serial.print(_delayHour);
+	Serial.print(":");
 	Serial.print(_delayMinute);
-	Serial.println(_delaySecond);
+	Serial.print(":");
+	Serial.print(_delaySecond);
+	Serial.print(":");
+	Serial.println(_delayMs);
 	Serial.print("Delay Setting (milli) : ");
 	Serial.println(_delayMilli);
 
-	Serial.print("Duration Setting (H:M:S) : ");
+	Serial.print("Duration Setting (H:M:S:mS) : ");
 	Serial.print(_durationHour);
+	Serial.print(":");
 	Serial.print(_durationMinute);
-	Serial.println(_durationSecond);
+	Serial.print(":");
+	Serial.print(_durationSecond);
+	Serial.print(":");
+	Serial.println(_durationMs);
 	Serial.print("Duration Setting (milli) : ");
 	Serial.println(_durationMilli);
 }
@@ -91,6 +98,21 @@ void EventTimer::setCyclic(boolean cyclic){
 //set delay
 void EventTimer::setDelay(unsigned long delayMilli){
 	_delayMilli = delayMilli;
+	unsigned long remainder = _delayMilli;
+
+	if (remainder >= A_HOUR){
+		_delayHour = remainder / A_HOUR;
+		remainder = remainder % A_HOUR;
+	}
+	if (remainder >= A_MINUTE){
+		_delayMinute = remainder / A_MINUTE;
+		remainder = remainder % A_MINUTE;
+	}
+	if (remainder >= A_SECOND){
+		_delaySecond = remainder / A_SECOND;
+		_delayMs = remainder % A_SECOND;
+	}
+	else _delayMs = remainder;
 }
 
 void EventTimer::setDelay(int minute, int second){
@@ -107,6 +129,21 @@ void EventTimer::setDelay(int hour, int minute, int second){
 //set duration
 void EventTimer::setDuration(unsigned long durationMilli){
 	_durationMilli = durationMilli;
+	unsigned long remainder = _durationMilli;
+
+	if (remainder >= A_HOUR){
+		_durationHour = remainder / A_HOUR;
+		remainder = remainder % A_HOUR;
+	}
+	if (remainder >= A_MINUTE){
+		_durationMinute = remainder / A_MINUTE;
+		remainder = remainder % A_MINUTE;
+	}
+	if (remainder >= A_SECOND){
+		_durationSecond = remainder / A_SECOND;
+		_durationMs = remainder % A_SECOND;
+	}
+	else _durationMs = remainder;
 }
 
 void EventTimer::setDuration(int minute, int second){
@@ -123,18 +160,17 @@ void EventTimer::setDuration(int hour, int minute, int second){
 boolean EventTimer::execute(){
 	boolean status = false;
 
-	if (_isInputAvailable){
-		_isEnable = _digInput->isStatus(150);//de-bouncing for milli second
-		if (!_isEnable)_prevDelayMilli = 0;
-		else{
-			if (_prevDelayMilli <= 0)_prevDelayMilli = millis();
-		}
-	}
+	if (_isInputAvailable)_isEnable = _digInput->isStatus(150);//de-bouncing for milli second
 
 	if(!_isEnable) {
+		_prevDelayMilli = 0;
+		_prevDurationMilli = 0;
 		if (_isOutputAvailable)this->_setOutput(status);
 		return status;
 	}
+	else {
+		if (_prevDelayMilli == 0)_prevDelayMilli = millis();
+	} 
 
 	//logic
 	if ((millis() - _prevDelayMilli) > _delayMilli){
@@ -154,24 +190,25 @@ boolean EventTimer::execute(){
 		}
 		
 		//has duration
-		if (_durationMilli <= 0){
+		if (_durationMilli >= 0){
 			if(_prevDurationMilli == 0)_prevDurationMilli = millis();
 			if((millis() - _prevDurationMilli) <= _durationMilli)status = true;
 			else{
 				status = false;
 				_isEnable = false;
 				_prevDelayMilli = 0;
+				_prevDurationMilli = 0;
 				//cyclic
 				if (_isCyclic){
 					_isEnable = true;
 					_prevDelayMilli = millis();
+					_prevDurationMilli = 0;
 				}
 			}
 		}
 	}
 
 	if (_isOutputAvailable)this->_setOutput(status);
-
 	return status;
 }
 

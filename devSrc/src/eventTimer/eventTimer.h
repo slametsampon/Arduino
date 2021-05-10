@@ -9,11 +9,11 @@
 	#include "../ioDevices/digitalInput.h"
 	#include "../ioDevices/digitalOutput.h"
 
-	const int A_SECOND = 1000;
-	const int A_MINUTE = A_SECOND * 60;
-	const int A_HOUR = A_MINUTE * 60;
-	const int A_DAY = A_HOUR * 24;
-	const int A_WEEK = A_DAY * 7;
+	const unsigned long A_SECOND = 1000;
+	const unsigned long A_MINUTE = 60 * A_SECOND;
+	const unsigned long A_HOUR = 60 * A_MINUTE;
+	const unsigned long A_DAY = 24 * A_HOUR;
+	const unsigned long A_WEEK = 7 * A_DAY;
 
 	class EventTimer{
 		public:
@@ -43,8 +43,8 @@
 			boolean _prevStatus;
 			unsigned long _delayMilli, _durationMilli;
 			unsigned long _prevDelayMilli, _prevDurationMilli;
-			int _delayHour, _delayMinute, _delaySecond;
-			int _durationHour, _durationMinute, _durationSecond;
+			int _delayHour, _delayMinute, _delaySecond, _delayMs;
+			int _durationHour, _durationMinute, _durationSecond, _durationMs;
 			DigitalInput *_digInput;
 			DigitalOutput *_digOutput;
 
